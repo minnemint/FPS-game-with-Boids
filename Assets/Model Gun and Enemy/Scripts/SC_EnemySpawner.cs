@@ -92,7 +92,7 @@ public class SC_EnemySpawner : MonoBehaviour
         }
         else
         {
-            GUI.DrawTexture(new Rect(Screen.width / 2 - 3, Screen.height / 2 - 3, 6, 6), crosshairTexture);
+            GUI.DrawTexture(new Rect(Screen.width / 2 - 20, Screen.height / 2 - 20, 40, 40), crosshairTexture);
         }
 
         GUI.Box(new Rect(Screen.width / 2 - 50, 10, 100, 25), (enemiesToEliminate - enemiesEliminated).ToString());
