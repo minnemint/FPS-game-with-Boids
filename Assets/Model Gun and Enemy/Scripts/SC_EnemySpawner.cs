@@ -9,6 +9,7 @@ public class SC_EnemySpawner : MonoBehaviour
     public float spawnInterval = 2; //Spawn new enemy each n seconds
     public int enemiesPerWave = 5; //How many enemies per wave
     public Transform[] spawnPoints;
+    public float waveIntermissionTime = 3f;
 
     float nextSpawnTime = 0;
     int waveNumber = 1;
@@ -26,8 +27,8 @@ public class SC_EnemySpawner : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        //Wait 10 seconds for new wave to start
-        newWaveTimer = 10;
+        //Wait waveIntermissionTime seconds for new wave to start
+        newWaveTimer = waveIntermissionTime;
         waitingForWave = true;
     }
 
@@ -65,6 +66,7 @@ public class SC_EnemySpawner : MonoBehaviour
                     npc.playerTransform = player.transform;
                     npc.es = this;
                     totalEnemiesSpawned++;
+                    FlockManager.FM.allFish.Add(enemy);
                 }
             }
         }
@@ -104,11 +106,11 @@ public class SC_EnemySpawner : MonoBehaviour
     public void EnemyEliminated(SC_NPCEnemy enemy)
     {
         enemiesEliminated++;
-
+        FlockManager.FM.allFish.Remove(enemy.gameObject);
         if(enemiesToEliminate - enemiesEliminated <= 0)
         {
             //Start next wave
-            newWaveTimer = 10;
+            newWaveTimer = waveIntermissionTime;
             waitingForWave = true;
             waveNumber++;
         }

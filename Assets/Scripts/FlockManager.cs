@@ -7,7 +7,7 @@ public class FlockManager : MonoBehaviour {
     public static FlockManager FM;
     public GameObject fishPrefab;
     public int numFish = 20;
-    public GameObject[] allFish;
+    public List<GameObject> allFish;
     public Vector3 swimLimits = new Vector3(5.0f, 5.0f, 5.0f);
     public Vector3 goalPos = Vector3.zero;
 
@@ -18,23 +18,9 @@ public class FlockManager : MonoBehaviour {
     [Range(1.0f, 5.0f)] public float rotationSpeed;
 
     void Start() {
-
-        allFish = new GameObject[numFish];
-
-        for (int i = 0; i < numFish; ++i) {
-
-            Vector3 pos = this.transform.position + new Vector3(
-                Random.Range(-swimLimits.x, swimLimits.x),
-                Random.Range(-swimLimits.y, swimLimits.y),
-                Random.Range(-swimLimits.z, swimLimits.z));
-
-            allFish[i] = Instantiate(fishPrefab, pos, Quaternion.identity);
-        }
-
         FM = this;
         goalPos = this.transform.position; //position of the flock manager
     }
-
 
     void Update() {
 
@@ -45,5 +31,11 @@ public class FlockManager : MonoBehaviour {
                 Random.Range(-swimLimits.y, swimLimits.y),
                 Random.Range(-swimLimits.z, swimLimits.z));
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(transform.position, swimLimits);
     }
 }

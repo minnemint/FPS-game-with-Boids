@@ -52,7 +52,7 @@ public class Flock : MonoBehaviour {
 
     private void ApplyRules() {
 
-        GameObject[] gos;
+        List<GameObject> gos;
         gos = FlockManager.FM.allFish;
 
         Vector3 vCentre = Vector3.zero;
