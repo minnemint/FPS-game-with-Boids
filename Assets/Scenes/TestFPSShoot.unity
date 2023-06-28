@@ -698,6 +698,8 @@ MonoBehaviour:
   - {fileID: 1153443267}
   - {fileID: 532837637}
   - {fileID: 1405064931}
+  waveIntermissionTime: 3
+  belongsToFlock: 0
 --- !u!4 &739644506
 Transform:
   m_ObjectHideFlags: 0

@@ -9,7 +9,6 @@ public class SC_NPCEnemy : MonoBehaviour, IEntity
 
     [HideInInspector]
     public SC_EnemySpawner es;
-    [HideInInspector]
     public Transform playerTransform;
 
     // Start is called before the first frame update

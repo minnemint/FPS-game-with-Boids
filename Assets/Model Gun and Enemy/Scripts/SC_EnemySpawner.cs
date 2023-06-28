@@ -10,6 +10,7 @@ public class SC_EnemySpawner : MonoBehaviour
     public int enemiesPerWave = 5; //How many enemies per wave
     public Transform[] spawnPoints;
     public float waveIntermissionTime = 3f;
+    public bool belongsToFlock = true;
 
     float nextSpawnTime = 0;
     int waveNumber = 1;
@@ -66,7 +67,8 @@ public class SC_EnemySpawner : MonoBehaviour
                     npc.playerTransform = player.transform;
                     npc.es = this;
                     totalEnemiesSpawned++;
-                    FlockManager.FM.allFish.Add(enemy);
+                    if (belongsToFlock)
+                        FlockManager.FM.allFish.Add(enemy);
                 }
             }
         }
@@ -92,7 +94,7 @@ public class SC_EnemySpawner : MonoBehaviour
         }
         else
         {
-            GUI.DrawTexture(new Rect(Screen.width / 2 - 20, Screen.height / 2 - 20, 40, 40), crosshairTexture);
+            GUI.DrawTexture(new Rect(Screen.width / 2 - 4, Screen.height / 2 - 4, 8, 8), crosshairTexture);
         }
 
         GUI.Box(new Rect(Screen.width / 2 - 50, 10, 100, 25), (enemiesToEliminate - enemiesEliminated).ToString());
