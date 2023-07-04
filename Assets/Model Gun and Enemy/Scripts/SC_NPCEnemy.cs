@@ -9,7 +9,6 @@ public class SC_NPCEnemy : MonoBehaviour, IEntity
 
     [HideInInspector]
     public SC_EnemySpawner es;
-    public Transform playerTransform;
 
     // Start is called before the first frame update
     void Start()
@@ -27,10 +26,6 @@ public class SC_NPCEnemy : MonoBehaviour, IEntity
         if(npcHP <= 0)
         {
             //Destroy the NPC
-            //Slightly bounce the npc dead prefab up
-            gameObject.GetComponent<Rigidbody>().velocity = (-(playerTransform.position - transform.position).normalized * knockAwayForce) + new Vector3(0, 5, 0);
-            GetComponent<Flock>().enabled = false;
-            GetComponent<SphereCollider>().enabled = false;
             es.EnemyEliminated(this);
             Destroy(gameObject);
         }
