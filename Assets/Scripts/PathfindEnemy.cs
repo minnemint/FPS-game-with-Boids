@@ -8,12 +8,17 @@ public class PathfindEnemy : MonoBehaviour, IEntity
     public float movementSpeed = 4f;
     public float npcHP = 50;
     public GameObject npcDeadPrefab;
+    public float attackDistance = 3f;
+    public float npcDamage = 5;
+    public float attackRate = 0.5f;
+    public Transform firePoint;
 
     [HideInInspector]
     public Transform playerTransform;
     [HideInInspector]
     public SC_EnemySpawner es;
     NavMeshAgent agent;
+    float nextAttackTime = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +36,26 @@ public class PathfindEnemy : MonoBehaviour, IEntity
     // Update is called once per frame
     void Update()
     {
+        if (agent.remainingDistance - attackDistance < 0.01f)
+        {
+            if (Time.time > nextAttackTime)
+            {
+                nextAttackTime = Time.time + attackRate;
+
+                //Attack
+                RaycastHit hit;
+                if (Physics.Raycast(firePoint.position, firePoint.forward, out hit, attackDistance))
+                {
+                    if (hit.transform.CompareTag("Player"))
+                    {
+                        Debug.DrawLine(firePoint.position, firePoint.position + firePoint.forward * attackDistance, Color.cyan);
+
+                        IEntity player = hit.transform.GetComponent<IEntity>();
+                        player.ApplyDamage(npcDamage);
+                    }
+                }
+            }
+        }
         //Move towards the player
         agent.destination = playerTransform.position;
         //Always look at player

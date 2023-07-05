@@ -252,10 +252,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91270d08c9cd51b4fb48a19206ab8c37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDistance: 3
   movementSpeed: 4
   npcHP: 50
   npcDeadPrefab: {fileID: 6374475599110489727, guid: a4105e00caccceb4a83f24c43e9708ae, type: 3}
+  attackDistance: 3
+  npcDamage: 5
+  attackRate: 0.5
+  firePoint: {fileID: 7041915535764605135}
   playerTransform: {fileID: 0}
   es: {fileID: 0}
 --- !u!1 &6119073495747824648
